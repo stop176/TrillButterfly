@@ -8,16 +8,15 @@ import UIKit
 import Foundation
 
 class ViewController: UIViewController {
-
+//outlets
     @IBOutlet var bluefly: UIImageView!
     @IBOutlet var leaffly: UIImageView!
     @IBOutlet var monarchfly: UIImageView!
     @IBOutlet var Butt: UITextField!
     @IBOutlet var TextQuote: UITextView!
     
-    var x: String = ""
     
-    
+    //request for Rest API
     private func getData(from url: String){
        let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
    
@@ -44,7 +43,7 @@ class ViewController: UIViewController {
         
     }
  
- //
+ //rounding for images
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,7 +59,7 @@ class ViewController: UIViewController {
         monarchfly.clipsToBounds = true
         
         
-      //  Do any additional setup after loading the view.
+      //  URL variable
         
       let url = "http://quotes.rest/qod.json"
         
@@ -74,7 +73,7 @@ class ViewController: UIViewController {
 
 
     
-// MARK: - Welcome
+// Structs for the JSON file
 struct Welcome: Decodable {
     let success: Success
     let contents: Contents
@@ -82,12 +81,12 @@ struct Welcome: Decodable {
     let copyright: Copyright
 }
 
-// MARK: - Contents
+
 struct Contents: Decodable {
     let quotes: [Quote]
 }
 
-// MARK: - Quote
+
 struct Quote: Decodable {
     let quote, length, author: String
     let tags: [String]
@@ -98,13 +97,12 @@ struct Quote: Decodable {
     let title: String
 }
 
-// MARK: - Copyright
 struct Copyright: Decodable {
     let year: Int
     let url: String
 }
 
-// MARK: - Success
+
 struct Success: Decodable {
     let total: Int
 }
